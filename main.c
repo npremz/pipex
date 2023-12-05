@@ -6,7 +6,7 @@
 /*   By: npremont <npremont@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:50:07 by npremont          #+#    #+#             */
-/*   Updated: 2023/12/04 18:22:30 by npremont         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:33:36 by npremont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	ft_execpid1(char **av, int *fd)
 		perror("dup2 1");
 		exit(3);
 	}
-	close(fd[0]);
-	close(fd[1]);
 	if (execve(path, args, NULL) == -1)
 	{
 		perror("execve 1");
@@ -53,7 +51,7 @@ void	ft_execpid2(char **av, int *fd)
 	args = ft_split(av[3], ' ');
 	if (!args)
 		exit(2);
-	path = ft_strjoin("/bin/", args[0]);
+	path = ft_strjoin("/usr/bin/", args[0]);
 	if (!path)
 	{
 		ft_free_split(args);
@@ -70,8 +68,6 @@ void	ft_execpid2(char **av, int *fd)
 		perror("dup2 1");
 		exit(3);
 	}
-	close(fd[0]);
-	close(fd[1]);
 	if (execve(path, args, NULL) == -1)
 	{
 		perror("execve 2");
